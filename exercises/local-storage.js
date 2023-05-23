@@ -45,7 +45,6 @@ if (localStorage.getItem("favorites") === null) {
 const favoritesLS = localStorage.getItem("favorites");
 let favoritesList = favoritesLS.split(",");
 const itemList = document.querySelectorAll(".card");
-
 itemList.forEach((element) => {
   if (favoritesList.includes(element.id)) {
     element.classList.add("red");
@@ -55,13 +54,13 @@ itemList.forEach((element) => {
 const changeColor = (e) => {
   const item = e.target;
   const id = item.id;
+
   if (favoritesList.includes(id)) {
-    const index = favoritesList.indexOf(id);
-    favoritesList.splice(index);
+    favoritesList.splice(favoritesList.indexOf(id), 1).join(",");
     localStorage.setItem("favorites", favoritesList);
     item.classList.add("white");
     item.classList.remove("red");
-  } else if (!favoritesList.includes(id)) {
+  } else if (!favoritesList.includes(id) && id) {
     favoritesList.push(id);
     localStorage.setItem("favorites", favoritesList);
     item.classList.add("red");
