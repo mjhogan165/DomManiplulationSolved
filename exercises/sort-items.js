@@ -1,8 +1,8 @@
 /**
  * SORTING NODES WITHIN A CONTAINER
  * Please, make sure to read the following files in the exercises-info folder before you start
- * * "02 SortingNode.md" 
-*/
+ * * "02 SortingNode.md"
+ */
 
 /**
  * @task
@@ -12,8 +12,8 @@
  */
 
 // Your code goes here...
-
-
+const allItems = document.querySelectorAll(".item");
+console.log(allItems);
 
 /**
  * @task
@@ -23,8 +23,8 @@
  */
 
 // Your code goes here...
-
-
+const sortBtns = document.querySelectorAll(".sortBtn");
+//console.log(sortBtns);
 
 /**
  * @task
@@ -39,8 +39,30 @@
 
 // Your code goes here...
 
-
-
+function sortData(direction) {
+  function compareFnAsc(a, b) {
+    if (a.id < b.id) return -1;
+    else if (a.id > b.id) return 1;
+    else return 0;
+  }
+  function compareFnDesc(a, b) {
+    if (a.id < b.id) return 1;
+    else if (a.id > b.id) return -1;
+    else return 0;
+  }
+  const itemArray = Array.from(allItems);
+  if (direction === "asc") {
+    itemArray.sort(compareFnAsc);
+    itemArray.forEach((item) => {
+      main.append(item);
+    });
+  } else if (direction === "desc") {
+    itemArray.sort(compareFnDesc);
+    itemArray.forEach((item) => {
+      main.append(item);
+    });
+  }
+}
 /**
  * @task
  * Iterate through the every item in sortBtn NodeList and apply the
@@ -50,5 +72,9 @@
  */
 
 // Your code goes here...
-
-
+sortBtns.forEach((element) => {
+  element.addEventListener("click", function () {
+    const sortdir = element.dataset.sortdir;
+    sortData(sortdir);
+  });
+});

@@ -38,3 +38,35 @@
  */
 
 // Your code goes here...
+const container = document.querySelector(".cardsContainer");
+if (localStorage.getItem("favorites") === null) {
+  localStorage.setItem("favorites", "");
+}
+const favoritesLS = localStorage.getItem("favorites");
+let favoritesList = favoritesLS.split(",");
+const itemList = document.querySelectorAll(".card");
+
+itemList.forEach((element) => {
+  if (favoritesList.includes(element.id)) {
+    element.classList.add("red");
+  }
+});
+
+const changeColor = (e) => {
+  const item = e.target;
+  const id = item.id;
+  if (favoritesList.includes(id)) {
+    const index = favoritesList.indexOf(id);
+    favoritesList.splice(index);
+    localStorage.setItem("favorites", favoritesList);
+    item.classList.add("white");
+    item.classList.remove("red");
+  } else if (!favoritesList.includes(id)) {
+    favoritesList.push(id);
+    localStorage.setItem("favorites", favoritesList);
+    item.classList.add("red");
+    item.classList.remove("white");
+  }
+};
+
+container.addEventListener("click", changeColor);

@@ -12,8 +12,10 @@
  */
 
 // Your code goes here...
-const allItems = document.querySelectorAll("item");
-
+const allItems = document.querySelectorAll(".item");
+//console.log(allItems);
+// const newArr = Array.from(allItems);
+//console.log(newArr);
 /**
  * @task
  * Select the main container by the id of "main"
@@ -47,18 +49,19 @@ const favs = document.getElementById("favs");
 function updateCollections(id, direction) {
   const element = document.getElementById(id);
   if (direction === "toMain") {
-    element.remove();
-    element.firstElementChild.classList.replace('fa-heart-crack', 'fa-heart-circle-plus')
+    element.firstElementChild.classList.replace(
+      "fa-heart-crack",
+      "fa-heart-circle-plus"
+    );
     main.append(element);
-  } else {
-    element.remove();
-    console.log(element.firstElementChild)
-    element.firstElementChild.classList.replace('fa-heart-circle-plus', 'fa-heart-crack')
+  } else if (direction === "toFavs") {
+    element.firstElementChild.classList.replace(
+      "fa-heart-circle-plus",
+      "fa-heart-crack"
+    );
     favs.append(element);
   }
 }
-
-updateCollections(3, "toFavs")
 
 /**
  * @task
@@ -75,6 +78,11 @@ updateCollections(3, "toFavs")
  */
 
 // Your code goes here...
-allItems.forEach(element => {
-    element.addEventListener("click", )
+allItems.forEach((element) => {
+  element.addEventListener("click", function () {
+    const parentId = element.parentNode.id;
+    const id = element.id;
+    const direction = parentId === "main" ? "toFavs" : "toMain";
+    updateCollections(id, direction);
+  });
 });
