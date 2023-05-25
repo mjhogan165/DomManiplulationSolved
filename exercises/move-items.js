@@ -48,19 +48,15 @@ const favs = document.getElementById("favs");
 // Your code goes here
 function updateCollections(id, direction) {
   const element = document.getElementById(id);
-  if (direction === "toMain") {
-    element.firstElementChild.classList.replace(
-      "fa-heart-crack",
-      "fa-heart-circle-plus"
-    );
-    main.append(element);
-  } else if (direction === "toFavs") {
-    element.firstElementChild.classList.replace(
-      "fa-heart-circle-plus",
-      "fa-heart-crack"
-    );
-    favs.append(element);
-  }
+  const iconClassToAdd = "toMain" ? "fa-heart-circle-plus" : "fa-heart-crack";
+  const iconClassToRemove = "toMain"
+    ? "fa-heart-crack"
+    : "fa-heart-circle-plus";
+  element.firstElementChild.classList.replace(
+    iconClassToRemove,
+    iconClassToAdd
+  );
+  direction === "toMain" ? main.append(element) : favs.append(element);
 }
 
 /**

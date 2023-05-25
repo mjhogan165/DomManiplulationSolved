@@ -40,28 +40,18 @@ const sortBtns = document.querySelectorAll(".sortBtn");
 // Your code goes here...
 
 function sortData(direction) {
-  function compareFnAsc(a, b) {
-    if (a.id < b.id) return -1;
-    else if (a.id > b.id) return 1;
-    else return 0;
-  }
-  function compareFnDesc(a, b) {
-    if (a.id < b.id) return 1;
-    else if (a.id > b.id) return -1;
-    else return 0;
-  }
+  const compareFn =
+    direction === "asc"
+      ? (a, b) => a.id.localeCompare(b.id)
+      : (a, b) => b.id.localeCompare(a.id);
+
   const itemArray = Array.from(allItems);
-  if (direction === "asc") {
-    itemArray.sort(compareFnAsc);
-    itemArray.forEach((item) => {
-      main.append(item);
-    });
-  } else if (direction === "desc") {
-    itemArray.sort(compareFnDesc);
-    itemArray.forEach((item) => {
-      main.append(item);
-    });
-  }
+  console.log(compareFn);
+  itemArray.sort(compareFn);
+  console.log(itemArray.sort(compareFn));
+  itemArray.forEach((item) => {
+    main.append(item);
+  });
 }
 /**
  * @task

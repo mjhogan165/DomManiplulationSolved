@@ -54,18 +54,17 @@ itemList.forEach((element) => {
 const changeColor = (e) => {
   const item = e.target;
   const id = item.id;
+  const isNewFavorite = !favoritesList.includes(id) && id ? true : false;
+  const colorToAdd = isNewFavorite ? "red" : "white";
+  const colorToRemove = isNewFavorite ? "white" : "red";
 
-  if (favoritesList.includes(id)) {
-    favoritesList.splice(favoritesList.indexOf(id), 1).join(",");
-    localStorage.setItem("favorites", favoritesList);
-    item.classList.add("white");
-    item.classList.remove("red");
-  } else if (!favoritesList.includes(id) && id) {
+  if (isNewFavorite) {
     favoritesList.push(id);
-    localStorage.setItem("favorites", favoritesList);
-    item.classList.add("red");
-    item.classList.remove("white");
-  }
+  } else favoritesList.splice(favoritesList.indexOf(id), 1).join(",");
+
+  localStorage.setItem("favorites", favoritesList);
+  item.classList.add(colorToAdd);
+  item.classList.remove(colorToRemove);
 };
 
 container.addEventListener("click", changeColor);
